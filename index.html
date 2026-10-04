@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vorträge 1A</title>
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vorträge 1A">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#f6f7f6; --card:#ffffff; --ink:#1b1f1e; --mute:#5f6b68; --line:#e2e6e4;
+  --acc:#0f766e; --acc-soft:#e3f3f0; --slot:#b45309; --slot-soft:#fdf0e1;
+  --frame:#6d28d9; --warn:#c2410c; --warn-soft:#fff1e6; --hid:#e4e8e6;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121615; --card:#1b201f; --ink:#e7ecea; --mute:#9aa6a3; --line:#2b3331;
+    --acc:#2dd4bf; --acc-soft:#173330; --slot:#f59e0b; --slot-soft:#33270f;
+    --frame:#a78bfa; --warn:#fb923c; --warn-soft:#3a2416; --hid:#2a3230;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top) + 8px) 12px 8px}
+.brand{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.brand b{font-size:17px;color:var(--acc)} .brand span{color:var(--mute);font-size:12px}
+.tabs{display:flex;gap:6px;overflow-x:auto}
+.tabs button{flex:1 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:7px 10px;border-radius:9px;font-size:14px}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.tools button,.chips button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:5px 9px;border-radius:999px;font-size:13px}
+.tools button.on,.chips button.on{background:var(--acc-soft);border-color:var(--acc);color:var(--acc);font-weight:600}
+.tools .lbl{font-size:12px;color:var(--mute);margin-left:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:5px 9px}
+main{padding:12px;padding-bottom:calc(env(safe-area-inset-bottom) + 40px);max-width:900px;margin:0 auto}
+h2{font-size:18px;margin:6px 0 4px} h3{font-size:15px;margin:0}
+.note{color:var(--mute);font-size:13px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 12px;overflow:hidden}
+.card .hd{display:flex;gap:8px;align-items:center;padding:9px 11px;border-bottom:1px solid var(--line)}
+.num{flex:none;min-width:26px;height:22px;border-radius:6px;background:var(--acc);color:#fff;
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.num.fr{background:var(--frame)}
+.tchips{margin-left:auto;display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end}
+.tchips i{font-style:normal;font-size:11px;border:1px solid var(--line);border-radius:5px;padding:0 5px;color:var(--mute)}
+.row{display:grid;grid-template-columns:57% 43%;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.de,.ru{padding:8px 10px}
+.de{font-size:15.5px}
+.ru{font-size:13.5px;color:var(--mute);font-style:italic;border-left:1px solid var(--line)}
+.hint{padding:7px 11px;font-size:12.5px;color:var(--mute);border-top:1px dashed var(--line)}
+.forms{padding:4px 11px 9px;font-size:13px;border-top:1px dashed var(--line)}
+.forms summary{cursor:pointer;color:var(--acc);font-size:12.5px;padding:4px 0}
+.forms div{padding:2px 0} .forms b{color:var(--acc);font-weight:600}
+.opt{color:var(--mute)} .slot{color:var(--slot);background:var(--slot-soft);border-radius:4px;padding:0 3px}
+/* скрытие колонок */
+.hideDe .de .tx, .hideRu .ru .tx{visibility:hidden}
+.hideDe .de, .hideRu .ru{position:relative;cursor:pointer}
+.hideDe .de::after, .hideRu .ru::after{content:"";position:absolute;inset:9px 10px;border-radius:6px;background:var(--hid)}
+.hideDe .de.show .tx, .hideRu .ru.show .tx{visibility:visible}
+.hideDe .de.show::after, .hideRu .ru.show::after{display:none}
+/* исчезающий текст */
+.gap{display:inline-block;min-width:1.4em;border-bottom:2px solid var(--line);color:transparent;cursor:pointer;
+  letter-spacing:.5px;line-height:1.15}
+.gap.open{color:inherit;border-bottom-color:var(--acc)}
+.fl{cursor:pointer} .fl .rest{display:none} .fl.open .rest{display:inline}
+/* темы */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.auf{font-size:13px;margin:0 0 3px} .auf.r{color:var(--mute);font-style:italic}
+.meta{font-size:12px;color:var(--mute);margin:4px 0 10px}
+.par{margin-bottom:10px}
+.row.blk .de{box-shadow:inset 3px 0 0 var(--acc);background:var(--acc-soft)}
+.row.frm .de{box-shadow:inset 3px 0 0 var(--frame)}
+.row.flag .de{background:var(--warn-soft);box-shadow:inset 3px 0 0 var(--warn)}
+.row.var .de,.row.var .ru{opacity:.75}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;background:var(--acc);
+  border-radius:4px;padding:0 4px;margin-right:4px;vertical-align:1px;font-style:normal}
+.badge.fr{background:var(--frame)} .badge.v{background:var(--mute)} .badge.w{background:var(--warn)}
+.flagtx{display:block;font-size:12px;color:var(--warn);margin-top:3px;font-style:normal}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin:0 0 10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.lg-b::before{background:var(--acc)} .lg-f::before{background:var(--frame)} .lg-w::before{background:var(--warn)}
+/* скелет */
+.step{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:10px 11px;margin-bottom:8px;cursor:pointer}
+.step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--acc-soft);color:var(--acc);
+  font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.step .k{font-size:16px;font-weight:600} .step .kr{font-size:13px;color:var(--mute);font-style:italic}
+.step .body{display:none;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.step.open .body{display:block}
+.step .body .d{font-size:15px;margin-bottom:6px} .step .body .r{font-size:13px;color:var(--mute);font-style:italic}
+.hideRu .step .kr{visibility:hidden}
+/* слова */
+.w{display:grid;grid-template-columns:38% 30% 32%;border-top:1px solid var(--line)}
+.w:first-child{border-top:0}
+.w > div{padding:8px 9px}
+.w .wd{font-weight:600} .w .wt{color:var(--acc);font-size:14px;border-left:1px solid var(--line)}
+.w .wr{font-size:13px;color:var(--mute);border-left:1px solid var(--line)}
+.w .wh{grid-column:1 / -1;padding:0 9px 8px;font-size:12px;color:var(--warn)}
+.hideDe .wd .tx,.hideTr .wt .tx,.hideRu .wr .tx{visibility:hidden}
+.hideDe .wd,.hideTr .wt,.hideRu .wr{position:relative;cursor:pointer}
+.hideDe .wd::after,.hideTr .wt::after,.hideRu .wr::after{content:"";position:absolute;inset:9px;border-radius:6px;background:var(--hid)}
+.hideDe .wd.show .tx,.hideTr .wt.show .tx,.hideRu .wr.show .tx{visibility:visible}
+.hideDe .wd.show::after,.hideTr .wt.show::after,.hideRu .wr.show::after{display:none}
+.hideDe .w .wh,.hideTr .w .wh{display:none}
+@media (max-width:420px){ .de{font-size:15px} .ru{font-size:13px} .row{grid-template-columns:56% 44%} }
+@media print{ header{position:static} .tools,.tabs{display:none} .card{break-inside:avoid} }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><b>Vorträge 1A</b><span>Sprechen Teil 1A · B2 Beruf</span></div>
+  <nav class="tabs" id="tabs">
+    <button data-t="bloecke">Блоки</button>
+    <button data-t="themen">Темы</button>
+    <button data-t="skelett">Скелет</button>
+    <button data-t="woerter">Слова</button>
+  </nav>
+  <div class="tools" id="tools"></div>
+</header>
+<main id="main"></main>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var LS = {
+    get: function(k, d){ try{ var v = localStorage.getItem('v1a_' + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+    set: function(k, v){ try{ localStorage.setItem('v1a_' + k, JSON.stringify(v)); }catch(e){} }
+  };
+  var st = {
+    tab: LS.get('tab', 'bloecke'), thema: LS.get('thema', 1), level: LS.get('level', 0),
+    hideDe: false, hideRu: false, hideTr: false, seed: 0, skOpen: {}
+  };
+  var main = document.getElementById('main'), tools = document.getElementById('tools');
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // ---- исчезающий текст ----
+  var wordIdx = 0;
+  function vanishPlain(text){
+    if (!st.level) return esc(text);
+    return text.split(/(\s+)/).map(function(tok){
+      if (/^\s+$/.test(tok) || tok === '') return tok;
+      var m = tok.match(/^([^A-Za-zÄÖÜäöüß0-9]*)([A-Za-zÄÖÜäöüß0-9][A-Za-zÄÖÜäöüß0-9\-\.]*[A-Za-zÄÖÜäöüß0-9]|[A-Za-zÄÖÜäöüß0-9])([^A-Za-zÄÖÜäöüß0-9]*)$/);
+      if (!m) return esc(tok);
+      var pre = m[1], w = m[2], post = m[3], i = wordIdx++;
+      if (st.level === 3) {
+        if (w.length < 2) return esc(tok);
+        return esc(pre) + '<span class="fl">' + esc(w[0]) + '<span class="rest">' + esc(w.slice(1)) + '</span></span>' + esc(post);
+      }
+      var mod = st.level === 1 ? 3 : 2;
+      if ((i + st.seed) % mod !== 0) return esc(tok);
+      return esc(pre) + '<span class="gap">' + esc(w) + '</span>' + esc(post);
+    }).join('');
+  }
+  // {опционально} серым, [a | b] — гнездо; гнёзда и опции не прячем
+  function rich(text, vanish){
+    return text.split(/(\{[^}]*\}|\[[^\]]*\])/).map(function(seg){
+      if (/^\{.*\}$/.test(seg)) return '<span class="opt">' + esc(seg.slice(1, -1)) + '</span>';
+      if (/^\[.*\]$/.test(seg)) return '<span class="slot">' + esc(seg.slice(1, -1)) + '</span>';
+      return vanish ? vanishPlain(seg) : esc(seg);
+    }).join('');
+  }
+  function row(de, ru, cls, pre){
+    return '<div class="row ' + (cls || '') + '"><div class="de"><span class="tx">' + (pre || '') + rich(de, true) +
+      '</span></div><div class="ru"><span class="tx">' + rich(ru, false) + '</span></div></div>';
+  }
+  function wc(t){ return t.split(/\s+/).filter(function(x){ return /[A-Za-zÄÖÜäöüß0-9]/.test(x); }).length; }
+  function fmt(sec){ sec = Math.round(sec); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); }
+
+  // ---- панель инструментов ----
+  function renderTools(){
+    var h = '';
+    if (st.tab === 'woerter') {
+      h += tbtn('hideDe', 'скрыть слово') + tbtn('hideTr', 'скрыть произношение') + tbtn('hideRu', 'скрыть перевод') +
+           '<button id="shuffle">перемешать</button>';
+    } else if (st.tab === 'skelett') {
+      h += tbtn('hideRu', 'скрыть русский') + '<button id="openAll">раскрыть всё</button><button id="closeAll">свернуть</button>';
+    } else {
+      h += tbtn('hideDe', 'скрыть DE') + tbtn('hideRu', 'скрыть RU') +
+        '<span class="lbl">исчезание</span><span class="seg">' +
+        ['текст', '−⅓', '−½', 'буквы'].map(function(t, i){ return '<button data-l="' + i + '" class="' + (st.level === i ? 'on' : '') + '">' + t + '</button>'; }).join('') +
+        '</span>' + (st.level === 1 || st.level === 2 ? '<button id="reseed">другие слова</button>' : '');
+    }
+    tools.innerHTML = h;
+    document.body.classList.toggle('hideDe', st.hideDe);
+    document.body.classList.toggle('hideRu', st.hideRu);
+    document.body.classList.toggle('hideTr', st.hideTr);
+  }
+  function tbtn(k, t){ return '<button data-h="' + k + '" class="' + (st[k] ? 'on' : '') + '">' + t + '</button>'; }
+
+  // ---- вкладка: блоки ----
+  function renderBloecke(){
+    wordIdx = 0;
+    var h = '<h2>Общие блоки</h2><p class="note">Повторяются в нескольких темах. Выучил блок — закрыл кусок сразу в 2–5 докладах. ' +
+      'Отсортированы по пользе: сверху те, что стоят в большем числе тем. Зачин и концовка — не здесь, они одинаковые везде.</p>';
+    BLOECKE.forEach(function(b){
+      h += '<div class="card"><div class="hd"><span class="num">Б' + b.id + '</span><h3>' + esc(b.titel) + '</h3><span class="tchips">' +
+        b.themen.map(function(t){ return '<i>' + t + '</i>'; }).join('') + '</span></div>';
+      h += row(b.de, b.ru);
+      if (b.hinweis) h += '<div class="hint">' + esc(b.hinweis) + '</div>';
+      if (b.formen) h += '<details class="forms"><summary>как звучит в каждой теме</summary>' +
+        b.formen.map(function(f){ return '<div><b>тема ' + f[0] + ':</b> ' + esc(f[1]) + '</div>'; }).join('') + '</details>';
+      h += '</div>';
+    });
+    h += '<h2 style="margin-top:18px">Рамки</h2><p class="note">Не целые предложения, а начала, которые повторяются. Учить как формулу: начало — и дальше своё.</p>';
+    RAHMEN.forEach(function(r, i){
+      h += '<div class="card"><div class="hd"><span class="num fr">Р' + (i + 1) + '</span><span class="tchips">' +
+        r.themen.map(function(t){ return '<i>' + t + '</i>'; }).join('') + '</span></div>' + row(r.de, r.ru) + '</div>';
+    });
+    main.innerHTML = h;
+  }
+
+  // ---- вкладка: темы ----
+  function themeChips(){
+    return '<div class="chips">' + THEMEN.map(function(t){
+      return '<button data-th="' + t.nr + '" class="' + (st.thema === t.nr ? 'on' : '') + '">' + t.nr + ' · ' + esc(t.kurz) + '</button>';
+    }).join('') + '</div>';
+  }
+  function renderThemen(){
+    wordIdx = 0;
+    var T = THEMEN[st.thema - 1];
+    var words = 0;
+    T.abs.forEach(function(p){ p.forEach(function(s){ if (!s.v) words += wc(s.de); }); });
+    var h = themeChips() + '<h2>Тема ' + T.nr + ' — ' + esc(T.name) + '</h2>' +
+      '<p class="auf">' + esc(T.auf_de) + '</p><p class="auf r">' + esc(T.auf_ru) + '</p>' +
+      '<p class="meta">' + words + ' слов · ≈ ' + fmt(words / 75 * 60) + ' при 75 слов в минуту</p>' +
+      '<div class="legend"><span class="lg-b">общий блок</span><span class="lg-f">рамка</span><span class="lg-w">уточнить</span></div>';
+    T.abs.forEach(function(p){
+      h += '<div class="card par">';
+      p.forEach(function(s){
+        var cls = [], pre = '';
+        if (s.b) { cls.push('blk'); pre += s.b.map(function(x){ return '<span class="badge">Б' + x + '</span>'; }).join(''); }
+        else if (s.r) { cls.push('frm'); pre += '<span class="badge fr">Р' + s.r.slice(1) + '</span>'; }
+        if (s.f) { cls.push('flag'); pre = '<span class="badge w">?</span>' + pre; }
+        if (s.v) { cls.push('var'); pre = '<span class="badge v">' + esc(s.v) + '</span> ' + pre; }
+        var r = row(s.de, s.ru, cls.join(' '), pre);
+        if (s.f) r = r.replace('</span></div><div class="ru">', '<span class="flagtx">' + esc(s.f) + '</span></span></div><div class="ru">');
+        h += r;
+      });
+      h += '</div>';
+    });
+    main.innerHTML = h;
+  }
+
+  // ---- вкладка: скелет ----
+  function renderSkelett(){
+    var T = THEMEN[st.thema - 1];
+    var open = st.skOpen[T.nr] || {};
+    var h = themeChips() + '<h2>Скелет — тема ' + T.nr + '</h2>' +
+      '<p class="note">По одной строке на абзац. Расскажи тему, глядя только на скелет. Забыл предложение — не стой, переходи к следующей строке. ' +
+      'Нажми на строку, чтобы проверить себя.</p>';
+    T.sk.forEach(function(k, i){
+      var p = T.abs[i] || [];
+      h += '<div class="step ' + (open[i] ? 'open' : '') + '" data-i="' + i + '"><div class="n">' + (i + 1) + '</div><div style="flex:1">' +
+        '<div class="k">' + esc(k.de) + '</div><div class="kr">' + esc(k.ru) + '</div>' +
+        '<div class="body"><div class="d">' + p.filter(function(s){ return !s.v; }).map(function(s){ return esc(s.de); }).join(' ') + '</div>' +
+        '<div class="r">' + p.filter(function(s){ return !s.v; }).map(function(s){ return esc(s.ru); }).join(' ') + '</div></div></div></div>';
+    });
+    main.innerHTML = h;
+  }
+
+  // ---- вкладка: слова ----
+  var order = WOERTER.map(function(_, i){ return i; });
+  function renderWoerter(){
+    var h = '<h2>Слова</h2><p class="note">Произношение — как записано со слов носителя, не правлено. Оранжевым — подсказка, где запись расходится с обычным произношением. ' +
+      'Скрой колонку и проверяй себя: нажатие открывает ячейку.</p><div class="card">';
+    order.forEach(function(i){
+      var w = WOERTER[i];
+      h += '<div class="w"><div class="wd"><span class="tx">' + esc(w[0]) + '</span></div><div class="wt"><span class="tx">' + esc(w[1]) +
+        '</span></div><div class="wr"><span class="tx">' + esc(w[2]) + '</span></div>' +
+        (w[3] ? '<div class="wh">' + esc(w[3]) + '</div>' : '') + '</div>';
+    });
+    main.innerHTML = h + '</div><p class="note">' + WOERTER.length + ' слов</p>';
+  }
+
+  function render(){
+    document.querySelectorAll('#tabs button').forEach(function(b){ b.classList.toggle('on', b.dataset.t === st.tab); });
+    renderTools();
+    ({ bloecke: renderBloecke, themen: renderThemen, skelett: renderSkelett, woerter: renderWoerter })[st.tab]();
+  }
+
+  // ---- события ----
+  document.getElementById('tabs').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    st.tab = b.dataset.t; LS.set('tab', st.tab); render(); window.scrollTo(0, 0);
+  });
+  tools.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.h) { st[b.dataset.h] = !st[b.dataset.h]; render(); return; }
+    if (b.dataset.l !== undefined) { st.level = +b.dataset.l; LS.set('level', st.level); render(); return; }
+    if (b.id === 'reseed') { st.seed++; render(); return; }
+    if (b.id === 'shuffle') { for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; } render(); return; }
+    if (b.id === 'openAll' || b.id === 'closeAll') {
+      var T = THEMEN[st.thema - 1], o = {};
+      if (b.id === 'openAll') T.sk.forEach(function(_, i){ o[i] = true; });
+      st.skOpen[T.nr] = o; render();
+    }
+  });
+  main.addEventListener('click', function(e){
+    var th = e.target.closest('[data-th]');
+    if (th) { st.thema = +th.dataset.th; LS.set('thema', st.thema); render(); return; }
+    var g = e.target.closest('.gap, .fl');
+    if (g) { g.classList.toggle('open'); e.stopPropagation(); return; }
+    var step = e.target.closest('.step');
+    if (step) { var T = THEMEN[st.thema - 1]; var o = st.skOpen[T.nr] = st.skOpen[T.nr] || {};
+      var i = +step.dataset.i; o[i] = !o[i]; step.classList.toggle('open', o[i]); return; }
+    var cell = e.target.closest('.de, .ru, .wd, .wt, .wr');
+    if (cell) {
+      var hidden = (st.hideDe && (cell.classList.contains('de') || cell.classList.contains('wd'))) ||
+                   (st.hideRu && (cell.classList.contains('ru') || cell.classList.contains('wr'))) ||
+                   (st.hideTr && cell.classList.contains('wt'));
+      if (hidden) cell.classList.toggle('show');
+    }
+  });
+
+  render();
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+})();
+</script>
+</body>
+</html>
